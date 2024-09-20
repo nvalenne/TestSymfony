@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -21,10 +22,10 @@ class ProductRepository extends ServiceEntityRepository
        return $this->findAll();
    }
 
-   public function createProduct(Product $product): void
+   public function createProduct(Product $product, EntityManager $em): void
    {
-       $this->_em->persist($product);
-       $this->_em->flush();
+       $em->persist($product);
+       $em->flush();
    }
 
     public function updateProduct(Product $product): void
